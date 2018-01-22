@@ -25,17 +25,4 @@ function points_init() {
 	register_taxonomy( 'points_taxonomy', array( 'points' ), $args );
 }
 add_action( 'init', 'points_init' );
-
-
-function taxonomy_save_image($term_id) {
-	$isCat = array();
-	foreach (get_categories(array('hide_empty' => 0)) as $key => $value) {
-		$isCat[] = $value->term_taxonomy_id;
-	}
-	if (!in_array($term_id,$isCat)) {
-		taxonomy_update_image( $term_id );
-	}
-}
-add_action( 'edit_term', 'taxonomy_save_image', 10, 3 );
-
 ?>
