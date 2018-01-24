@@ -4,13 +4,99 @@
         "title": "Map: Custom Field",
         "fields": [
             {
+                "key": "field_5a66dbbddde77",
+                "label": "Set Max Bounds",
+                "name": "set_max_bounds",
+                "type": "true_false",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "message": "",
+                "default_value": 1,
+                "ui": 0,
+                "ui_on_text": "",
+                "ui_off_text": ""
+            },
+            {
+                "key": "field_5a67e356469ca",
+                "label": "Zoom",
+                "name": "zoom",
+                "type": "group",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "sub_fields": [
+                    {
+                        "key": "field_5a67e367469cb",
+                        "label": "Min",
+                        "name": "min",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": 1,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "min": 0,
+                        "max": "",
+                        "step": ""
+                    },
+                    {
+                        "key": "field_5a67e37a469cc",
+                        "label": "Max",
+                        "name": "max",
+                        "type": "number",
+                        "instructions": "",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "default_value": 6,
+                        "placeholder": "",
+                        "prepend": "",
+                        "append": "",
+                        "min": "",
+                        "max": 6,
+                        "step": ""
+                    }
+                ]
+            },
+            {
                 "key": "field_5a5d5afc2a8bc",
                 "label": "North East",
                 "name": "north_east",
                 "type": "group",
                 "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5a66dbbddde77",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
                 "wrapper": {
                     "width": "",
                     "class": "",
@@ -64,8 +150,16 @@
                 "name": "south_west",
                 "type": "group",
                 "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
+                "required": 1,
+                "conditional_logic": [
+                    [
+                        {
+                            "field": "field_5a66dbbddde77",
+                            "operator": "==",
+                            "value": "1"
+                        }
+                    ]
+                ],
                 "wrapper": {
                     "width": "",
                     "class": "",
@@ -110,6 +204,95 @@
                         "prepend": "",
                         "append": "",
                         "maxlength": ""
+                    }
+                ]
+            },
+            {
+                "key": "field_5a6586494c4e7",
+                "label": "Image",
+                "name": "image",
+                "type": "group",
+                "instructions": "",
+                "required": 1,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "layout": "table",
+                "sub_fields": [
+                    {
+                        "key": "field_5a6586594c4e8",
+                        "label": "Level 1",
+                        "name": "level_1",
+                        "type": "image",
+                        "instructions": "Level zoom: 0-2\r\nImage min width: 1024",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "array",
+                        "preview_size": "thumbnail",
+                        "library": "all",
+                        "min_width": 1024,
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_5a6586ee4c4e9",
+                        "label": "Level 2",
+                        "name": "level_2",
+                        "type": "image",
+                        "instructions": "Level zoom: 3-4\r\nImage min width: 4096",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "array",
+                        "preview_size": "thumbnail",
+                        "library": "all",
+                        "min_width": 4096,
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
+                    },
+                    {
+                        "key": "field_5a6586f74c4ea",
+                        "label": "Level 3",
+                        "name": "level_3",
+                        "type": "image",
+                        "instructions": "Level zoom: 5-6\r\nImage min width: 16384",
+                        "required": 1,
+                        "conditional_logic": 0,
+                        "wrapper": {
+                            "width": "",
+                            "class": "",
+                            "id": ""
+                        },
+                        "return_format": "array",
+                        "preview_size": "thumbnail",
+                        "library": "all",
+                        "min_width": 16384,
+                        "min_height": "",
+                        "min_size": "",
+                        "max_width": "",
+                        "max_height": "",
+                        "max_size": "",
+                        "mime_types": ""
                     }
                 ]
             }
@@ -160,7 +343,7 @@
             },
             {
                 "key": "field_5a55d07ae87ef",
-                "label": "Lat Lng",
+                "label": "Vị trí",
                 "name": "point_lat_lng",
                 "type": "repeater",
                 "instructions": "",
@@ -174,7 +357,7 @@
                 "collapsed": "",
                 "min": 0,
                 "max": 0,
-                "layout": "table",
+                "layout": "row",
                 "button_label": "",
                 "sub_fields": [
                     {
@@ -219,7 +402,7 @@
                         "key": "field_5a55d0cbe87f3",
                         "label": "Description",
                         "name": "description",
-                        "type": "textarea",
+                        "type": "wysiwyg",
                         "instructions": "",
                         "required": 0,
                         "conditional_logic": 0,
@@ -229,10 +412,10 @@
                             "id": ""
                         },
                         "default_value": "",
-                        "placeholder": "",
-                        "maxlength": "",
-                        "rows": "",
-                        "new_lines": ""
+                        "tabs": "all",
+                        "toolbar": "full",
+                        "media_upload": 1,
+                        "delay": 0
                     },
                     {
                         "key": "field_5a5835de92d61",

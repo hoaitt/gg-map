@@ -12,7 +12,8 @@
     }
     $( document ).ready(function() {
       var map;
-      var map_filters = $('#map-filters');
+      var mapData;
+      var map_filters = $('.map-filters');
       var mapID;
       var iconurl;
       var markers = [];
@@ -24,11 +25,13 @@
             })
           }
         })
-        var group = new L.featureGroup(markers);
-        map.fitBounds(group.getBounds());
-        setTimeout(function(){
-          panToDefaultMarker();
-        },1000)
+        if(markers.length){
+          var group = new L.featureGroup(markers);
+          map.fitBounds(group.getBounds());
+          setTimeout(function(){
+            panToDefaultMarker();
+          },1000)
+        }
       }
       function showLatLng(latlng){
         var lat = $('.lat');
@@ -79,6 +82,12 @@
             iconSize:     [icone.width*3, icone.height*3],
             iconAnchor:   [icone.width*3/2, icone.height*3/2],
             popupAnchor:  [0, -1*(icone.height*4/2)],
+          }),
+          "6":L.icon({
+            iconUrl: icone.image,
+            iconSize:     [icone.width*3, icone.height*3],
+            iconAnchor:   [icone.width*3/2, icone.height*3/2],
+            popupAnchor:  [0, -1*(icone.height*4/2)],
           })
         }
         icon.popup_resize = {
@@ -86,7 +95,8 @@
           "2":new L.Point(0, -(icone.height/2)+10),
           "3":new L.Point(0, -icone.height+10),
           "4":new L.Point(0, -icone.height+10),
-          "5":new L.Point(0, -icone.height*2+10)
+          "5":new L.Point(0, -icone.height*2+10),
+          "6":new L.Point(0, -icone.height*2+10)
         }
         return icon;
       }
@@ -94,12 +104,15 @@
         if(!location.latlng) return false;
         var zoom = map._zoom;
         var opt = {
-          'draggable' : true,
+          'draggable' : false,
           'clickable' : true,
           'clicked': false,
           'clean': false,
           'map' : map,
         };
+        if(mapData.edit) {
+          opt.draggable = true;
+        }
         var icone = addIconDefault(location);
         opt.icon = icone.marker_resize[zoom];
         if(icone.marker_resize != undefined){
@@ -110,9 +123,12 @@
         }
         var marker = L.marker(location.latlng, opt).addTo(map);
         if(location.description){
-          marker.popup = L.popup(popupOptions())
+          marker.popup = L.popup(popupOptions({}))
           .setLatLng(location.latlng)
           .setContent(popupContent(location, content))
+        }
+        if(content.title){
+          marker.bindTooltip(content.title, tooltipOptions({})).addTo(map);
         }
         if(content){
           marker.content = content;
@@ -133,14 +149,14 @@
           str = '<div class="ggmap-popup">';
         }
         if(location.image){
-          str += '<div class="ggmap-contentleft"><img src="'+location.image+'" style="max-width:100%"/></div>';
+          str += '<div class="ggmap-contentleft" style="background-image:url('+location.image+')"></div>';
         }
         str += '<div class="ggmap-contentright">';
         if(content && content.title){
           str += '<h3 class="ggmap-title">'+content.title+'</h3>';
         }
         if(location && location.description){
-          str += '<div>'+location.description+'</div>';
+          str += '<div class="ggmap-desc">'+location.description+'</div>';
         }
         str += '</div>';
         if(location.url){
@@ -153,6 +169,13 @@
       function popupOptions(options){
         if(!options) return;
         options.offset = new L.Point(10, 10);
+        options.maxWidth = "400";
+        return options;
+      }
+      function tooltipOptions(options){
+        if(!options) return;
+        options.sticky = true;
+        // options.offset = new L.Point(10, 10);
         return options;
       }
       function moveToMarker(id){
@@ -203,11 +226,12 @@
         var mapElm = $('#map');
         if(mapElm.length){
           var data = mapElm.data();
-          iconurl = data.iconurl;
-          mapID = data.mapid;
-          var tiles = L.tileLayer(data.mapurl, {
+          mapData = data;
+          iconurl = mapData.iconurl;
+          mapID = mapData.mapid;
+          var tiles = L.tileLayer(mapData.mapurl, {
             minZoom: 1,
-            maxZoom: 5,
+            maxZoom: 6,
             noWrap: true,
             tms: true
           });
@@ -215,17 +239,17 @@
           map = L.map('map', {
             center: [0, 0],
             zoom:1,
-            minZoom: 1,
-            maxZoom: 5,
+            minZoom: mapData.zoom_min || 2,
+            maxZoom: mapData.zoom_max || 6,
             layers:[tiles],
           });
           var northEast = '';
           var southWest = '';
-          if(data.north_east){
-            northEast = L.latLng(data.north_east[0], data.north_east[1]);
+          if(mapData.north_east){
+            northEast = L.latLng(mapData.north_east[0], mapData.north_east[1]);
           }
-          if(data.south_west){
-            southWest = L.latLng(data.south_west[0], data.south_west[1]);
+          if(mapData.south_west){
+            southWest = L.latLng(mapData.south_west[0], mapData.south_west[1]);
           }
           if(southWest && southWest){
             var bounds = new L.LatLngBounds(southWest, northEast);
@@ -235,7 +259,7 @@
             })
           }
 
-          if(data.edit) {
+          if(mapData.edit) {
             map.on('click', function(e){
               addMarker({'latlng':e.latlng});
               showLatLng(e.latlng);
@@ -259,9 +283,13 @@
         }
       }
       if(map_filters.length){
-        map_filters.on('change', function(e){
-          var val = $(this).val();
-          getData(val);
+        map_filters.find('input').on('change', function(e){
+          var val_arr = [];
+          map_filters.find('input:checked').each(function () {
+            val_arr.push($(this).val());
+          });
+          console.log(val_arr);
+          getData(val_arr.join(', '));
         })
       }
       initMap();
