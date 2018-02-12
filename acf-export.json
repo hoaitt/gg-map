@@ -238,7 +238,7 @@
                         "return_format": "array",
                         "preview_size": "thumbnail",
                         "library": "all",
-                        "min_width": 1024,
+                        "min_width": "",
                         "min_height": "",
                         "min_size": "",
                         "max_width": "",
@@ -262,7 +262,7 @@
                         "return_format": "array",
                         "preview_size": "thumbnail",
                         "library": "all",
-                        "min_width": 4096,
+                        "min_width": "",
                         "min_height": "",
                         "min_size": "",
                         "max_width": "",
@@ -286,7 +286,7 @@
                         "return_format": "array",
                         "preview_size": "thumbnail",
                         "library": "all",
-                        "min_width": 16384,
+                        "min_width": "",
                         "min_height": "",
                         "min_size": "",
                         "max_width": "",
@@ -340,6 +340,123 @@
                 "multiple": 0,
                 "return_format": "object",
                 "ui": 1
+            },
+            {
+                "key": "field_5a5835de92d61",
+                "label": "Image",
+                "name": "image",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": "",
+                "max_height": "",
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5a55d0cbe87f3",
+                "label": "Description",
+                "name": "description",
+                "type": "wysiwyg",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "",
+                "tabs": "all",
+                "toolbar": "full",
+                "media_upload": 1,
+                "delay": 0
+            },
+            {
+                "key": "field_5a55d0c6e87f2",
+                "label": "Icon",
+                "name": "icon",
+                "type": "image",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "return_format": "url",
+                "preview_size": "thumbnail",
+                "library": "all",
+                "min_width": "",
+                "min_height": "",
+                "min_size": "",
+                "max_width": 100,
+                "max_height": 100,
+                "max_size": "",
+                "mime_types": ""
+            },
+            {
+                "key": "field_5a585f959db91",
+                "label": "Url",
+                "name": "url",
+                "type": "text",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "default_value": "#",
+                "placeholder": "",
+                "prepend": "",
+                "append": "",
+                "maxlength": ""
+            },
+            {
+                "key": "field_5a5c1af572004",
+                "label": "Phân loại",
+                "name": "point_type",
+                "type": "checkbox",
+                "instructions": "",
+                "required": 0,
+                "conditional_logic": 0,
+                "wrapper": {
+                    "width": "",
+                    "class": "",
+                    "id": ""
+                },
+                "choices": {
+                    "Nhà hàng": "Nhà hàng",
+                    "Khách sạn": "Khách sạn",
+                    "Vui chơi": "Vui chơi",
+                    "Ăn uống": "Ăn uống",
+                    "Điểm dừng chân": "Điểm dừng chân",
+                    "Trò chơi mạo hiểm": "Trò chơi mạo hiểm",
+                    "Thể thao": "Thể thao",
+                    "Ngoài trời": "Ngoài trời",
+                    "Trong nhà": "Trong nhà"
+                },
+                "allow_custom": 1,
+                "save_custom": 1,
+                "default_value": [],
+                "layout": "horizontal",
+                "toggle": 0,
+                "return_format": "value"
             },
             {
                 "key": "field_5a55d07ae87ef",
@@ -397,125 +514,8 @@
                         "prepend": "",
                         "append": "",
                         "maxlength": ""
-                    },
-                    {
-                        "key": "field_5a55d0cbe87f3",
-                        "label": "Description",
-                        "name": "description",
-                        "type": "wysiwyg",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "tabs": "all",
-                        "toolbar": "full",
-                        "media_upload": 1,
-                        "delay": 0
-                    },
-                    {
-                        "key": "field_5a5835de92d61",
-                        "label": "Image",
-                        "name": "image",
-                        "type": "image",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "return_format": "url",
-                        "preview_size": "thumbnail",
-                        "library": "all",
-                        "min_width": "",
-                        "min_height": "",
-                        "min_size": "",
-                        "max_width": "",
-                        "max_height": "",
-                        "max_size": "",
-                        "mime_types": ""
-                    },
-                    {
-                        "key": "field_5a585f959db91",
-                        "label": "Url",
-                        "name": "url",
-                        "type": "text",
-                        "instructions": "",
-                        "required": 0,
-                        "conditional_logic": 0,
-                        "wrapper": {
-                            "width": "",
-                            "class": "",
-                            "id": ""
-                        },
-                        "default_value": "",
-                        "placeholder": "",
-                        "prepend": "",
-                        "append": "",
-                        "maxlength": ""
                     }
                 ]
-            },
-            {
-                "key": "field_5a55d0c6e87f2",
-                "label": "Icon",
-                "name": "icon",
-                "type": "image",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "return_format": "url",
-                "preview_size": "thumbnail",
-                "library": "all",
-                "min_width": "",
-                "min_height": "",
-                "min_size": "",
-                "max_width": "",
-                "max_height": "",
-                "max_size": "",
-                "mime_types": ""
-            },
-            {
-                "key": "field_5a5c1af572004",
-                "label": "Phân loại",
-                "name": "point_type",
-                "type": "checkbox",
-                "instructions": "",
-                "required": 0,
-                "conditional_logic": 0,
-                "wrapper": {
-                    "width": "",
-                    "class": "",
-                    "id": ""
-                },
-                "choices": {
-                    "Nhà hàng": "Nhà hàng",
-                    "Khách sạn": "Khách sạn",
-                    "Vui chơi": "Vui chơi",
-                    "Ăn uống": "Ăn uống",
-                    "Điểm dừng chân": "Điểm dừng chân",
-                    "Trò chơi mạo hiểm": "Trò chơi mạo hiểm",
-                    "Thể thao": "Thể thao",
-                    "Ngoài trời": "Ngoài trời",
-                    "Trong nhà": "Trong nhà"
-                },
-                "allow_custom": 1,
-                "save_custom": 1,
-                "default_value": [],
-                "layout": "horizontal",
-                "toggle": 0,
-                "return_format": "value"
             }
         ],
         "location": [
