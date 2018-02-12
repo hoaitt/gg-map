@@ -1,4 +1,14 @@
 <?php
+function delTree($dir)
+{
+    $files = array_diff(scandir($dir), array('.', '..'));
+
+    foreach ($files as $file) {
+        (is_dir("$dir/$file")) ? delTree("$dir/$file") : unlink("$dir/$file");
+    }
+
+    return rmdir($dir);
+}
 
 function custom_button($post_id){
     $current_post_type =  get_post_type();
@@ -21,8 +31,7 @@ function map_save_post( $post_id ) {
     // If this is just a revision, don't send the email.
     if ( wp_is_post_revision( $post_id ) )
         return;
-
-    if(isset($_POST['create_map']) && has_post_thumbnail()){
+    if(isset($_POST['create_map'])){
         require 'libs/maptiler.php';
         $feat_image = get_attached_file( get_post_thumbnail_id($post_id));
         $post_acf = array(
@@ -36,6 +45,9 @@ function map_save_post( $post_id ) {
                 $post_acf['image'][$key]['image_path'] = get_attached_file($item['ID']);
             endforeach;
         endif;
+        if (file_exists($tiles_path)) {
+            delTree($tiles_path);
+        }
         if(isset($post_acf['image']['level_1'])){
             $image_path = $post_acf['image']['level_1']['image_path'];
             $map_tiler = new MapTiler($image_path, array(
@@ -65,7 +77,7 @@ function map_save_post( $post_id ) {
                 'zoom_max' => 4,
                 'format' => 'png',
                 'fill_color' => '#dddddd',
-                'force' => true
+                'force' => false
             ));
             //execute
             try {

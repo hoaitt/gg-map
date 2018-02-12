@@ -32,10 +32,14 @@ function block_action() {
   }
   $wp_query = new WP_Query( $args );
   while( $wp_query->have_posts() ) : $wp_query->the_post();
+    global $post;
     $rows_acf = array(
       'map_id' => get_field('map_id',get_the_id()),
       'point_lat_lng' => get_field('point_lat_lng',get_the_id()),
       'icon' => get_field('icon',get_the_id()),
+      'image' => get_field('image',get_the_id()),
+      'description' => get_field('description',get_the_id()),
+      'url' => get_field('url',get_the_id()),
       'point_type' => get_field('point_type',get_the_id())
     );
 
@@ -43,9 +47,13 @@ function block_action() {
       $cat_arr = get_the_terms(get_the_id(), 'points_taxonomy');
       $ar = [
         "post_id" => get_the_id(),
+        "slug" => $post->post_name,
         "title" => get_the_title(),
         "cat" => array(),
-        "locations" => array()
+        "locations" => array(),
+        "image" => $rows_acf['image'],
+        "description" => $rows_acf['description'],
+        "url" => $rows_acf['url']
       ];
       if( $rows_acf['point_lat_lng'] ) {
         foreach($rows_acf['point_lat_lng'] as $key => $row) {
@@ -54,10 +62,7 @@ function block_action() {
               "lat"=> (float)$row['lat'],
               "lng"=> (float)$row['lng'],
             ),
-            "icon" => $rows_acf['icon'],
-            "image" => $row['image'],
-            "description" => $row['description'],
-            "url" => $row['url']
+            "icon" => $rows_acf['icon']
           );
         }
       }

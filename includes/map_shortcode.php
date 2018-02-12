@@ -33,7 +33,7 @@
       $map .= '</div>';
     }
     $map .= '
-      <div id="map" style="width: 100%; height: 500px;"
+      <div id="map" style="max-width:100%;max-height:100%;width: 500px; height: 500px;"
           data-zoom_min = "'.$map_acf['zoom']['min'].'"
           data-zoom_max = "'.$map_acf['zoom']['max'].'"
           data-north_east = "'.$north_east.'"
@@ -42,6 +42,52 @@
           data-mapUrl="'.$map_url.'"
           data-iconUrl="'.plugin_dir_url( __DIR__ ).'images/icons/default.svg"></div>
     ';
+
+    $points_taxonomy = get_terms(array(
+      'taxonomy' => 'points_taxonomy',
+      'hide_empty' => false,
+    ));
+    if(isset($points_taxonomy)):
+      $map .= '<div class="map-annotate"><div class="row">';
+      foreach($points_taxonomy as $item) :
+        $args = array(
+          'post_type' => 'points',
+          'posts_per_page' => -1,
+          'tax_query' => array(
+            array(
+            'taxonomy' => 'points_taxonomy',
+            'field' => 'term_id',
+            'terms' => $item->term_id,
+            )
+          )
+        );
+        $wp_query = new WP_Query( $args );
+
+
+        $map .= '<div class="annotate col-md-4">';
+        $map .= '<h3 class="annotate-title">'.$item->name.'</h3>';
+        if ( $wp_query->have_posts() ):
+          $map .= '<ul>';
+          while ( $wp_query->have_posts() ) : $wp_query->the_post();
+            $acf_array = array(
+              'icon' => get_field('icon', get_the_ID())
+            );
+            // dump($acf_array);
+            $map .= '<li>';
+            if(isset($acf_array['icon'])):
+              $map .= '<img class="annotate-icon" src="'.$acf_array['icon'].'"/>';
+            endif;
+            $map .= get_the_title().'</li>';
+          endwhile;
+          $map .= '</ul>';
+        endif;
+        wp_reset_query();
+        $map .= '</div>';
+      endforeach;
+      $map .= '</div></div>';
+    endif;
+
+
     return $map;
   }
   add_shortcode( 'show_map', 'create_shortcode' );

@@ -51,21 +51,26 @@
 			$north_east =  "";
 			$south_west = "";
 		}
-		echo '
-            <div style="margin-bottom: 20px;">
-                Lat: <input class="lat" type="text" name="lat" style="width: 250px" />
-                Lng: <input class="lng" type="text" name="lng" style="width: 250px" />
-            </div>
-            <div id="map" style="width: 100%; height: 500px;"
-								data-edit = "true"
-								data-zoom_min = "'.$map_acf['zoom']['min'].'"
-                data-zoom_max = "'.$map_acf['zoom']['max'].'"
-								data-north_east = "'.$north_east.'"
-                data-south_west = "'.$south_west.'"
-                data-mapId="'.$map_obj->ID.'"
-                data-mapUrl="'.$map_url.'"
-                data-iconUrl="'.plugin_dir_url( __DIR__ ).'images/icons/default.svg"></div>
-		';
+
+		if(!isset($map_obj->ID)){
+			echo '';
+		}else{
+			echo '
+							<div style="margin-bottom: 20px;">
+									Lat: <input class="lat" type="text" name="lat" style="width: 250px" />
+									Lng: <input class="lng" type="text" name="lng" style="width: 250px" />
+							</div>
+							<div id="map" style="width: 100%; height: 500px;"
+									data-edit = "true"
+									data-zoom_min = "'.$map_acf['zoom']['min'].'"
+									data-zoom_max = "'.$map_acf['zoom']['max'].'"
+									data-north_east = "'.$north_east.'"
+									data-south_west = "'.$south_west.'"
+									data-mapId="'.$map_obj->ID.'"
+									data-mapUrl="'.$map_url.'"
+									data-iconUrl="'.plugin_dir_url( __DIR__ ).'images/icons/default.svg"></div>
+			';
+		}
 	}
 
 	function wpt_add_points_metaboxes() {

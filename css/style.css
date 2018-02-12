@@ -5,7 +5,7 @@
   display:block;
   color:#000;
   text-decoration: none;
-  min-width: 500px;
+  max-width: 100%;
 }
 .leaflet-popup-content .ggmap-popup::after {
   content: "";
@@ -24,8 +24,11 @@
   overflow: hidden;
 }
 .leaflet-popup-content .ggmap-popup .ggmap-contentright .ggmap-title{
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 0;
+  margin-bottom: 0;
+}
+.leaflet-popup-content .ggmap-popup .ggmap-contentright .ggmap-desc{
   margin-bottom: 10px;
 }
 .leaflet-container a.leaflet-popup-close-button{
@@ -38,4 +41,28 @@
 }
 .acf-field .description{
   white-space: pre-line;
+}
+.leaflet-container::after {
+  content: 'Use two fingers to move the map';
+  position: absolute;
+  z-index: 9999;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  text-align: center;
+  padding: 0 30px;
+}
+.leaflet-container.swiping::after {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease-in;
 }
