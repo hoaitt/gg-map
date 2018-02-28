@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="42px" viewBox="0 0 16 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>fullscreen</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="fullscreen" transform="translate(-5.000000, -5.000000)" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="layer1" transform="translate(5.000000, 4.637800)">
+                <polygon id="rect15634" points="0 10.3622 0 16.3622 6 16.3622 6 14.3622 2 14.3622 2 10.3622"></polygon>
+                <polygon id="path15639" points="16 10.3622 16 16.3622 10 16.3622 10 14.3622 14 14.3622 14 10.3622"></polygon>
+                <polygon id="rect15653" points="5 32.3622 5 36.3622 6 37.3622 10 37.3622 11 36.3622 11 32.3622 10 31.3622 6 31.3622"></polygon>
+                <polygon id="path16059" points="0 6.3622 0 0.3622 6 0.3622 6 2.3622 2 2.3622 2 6.3622"></polygon>
+                <polygon id="path16061" points="16 6.3622 16 0.3622 10 0.3622 10 2.3622 14 2.3622 14 6.3622"></polygon>
+                <polygon id="path16063" points="0 36.3622 0 42.3622 6 42.3622 6 40.3622 2 40.3622 2 36.3622"></polygon>
+                <polygon id="path16065" points="16 36.3622 16 42.3622 10 42.3622 10 40.3622 14 40.3622 14 36.3622"></polygon>
+                <polygon id="path16067" points="0 32.3622 0 26.3622 6 26.3622 6 28.3622 2 28.3622 2 32.3622"></polygon>
+                <polygon id="path16069" points="16 32.3622 16 26.3622 10 26.3622 10 28.3622 14 28.3622 14 32.3622"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

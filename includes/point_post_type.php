@@ -40,24 +40,37 @@
 		$map_obj = get_field('map_id', $post->ID);
 		$map_url = get_field('map_url', $map_obj->ID);
 		$map_acf = array(
+			'set_max_bounds' => get_field('set_max_bounds', $map_obj->ID),
+			'zoom' => get_field('zoom', $map_obj->ID),
 			'north_east' => get_field('north_east', $map_obj->ID),
 			'south_west' => get_field('south_west', $map_obj->ID)
 		);
 		$north_east = $map_acf['north_east']['lat'] ? '['.$map_acf['north_east']['lat'].', '.$map_acf['north_east']['lng'].']' : "";
 		$south_west = $map_acf['south_west']['lat'] ? '['.$map_acf['south_west']['lat'].', '.$map_acf['south_west']['lng'].']' : "";
-		echo '
-            <div style="margin-bottom: 20px;">
-                Lat: <input class="lat" type="text" name="lat" style="width: 250px" />
-                Lng: <input class="lng" type="text" name="lng" style="width: 250px" />
-            </div>
-            <div id="map" style="width: 100%; height: 500px;"
-								data-edit = "true"
-								data-north_east = "'.$north_east.'"
-                data-south_west = "'.$south_west.'"
-                data-mapId="'.$map_obj->ID.'"
-                data-mapUrl="'.$map_url.'"
-                data-iconUrl="'.plugin_dir_url( __DIR__ ).'images/icons/default.svg"></div>
-		';
+		if($map_acf['set_max_bounds'] !== true){
+			$north_east =  "";
+			$south_west = "";
+		}
+
+		if(!isset($map_obj->ID)){
+			echo '';
+		}else{
+			echo '
+							<div style="margin-bottom: 20px;">
+									Lat: <input class="lat" type="text" name="lat" style="width: 250px" />
+									Lng: <input class="lng" type="text" name="lng" style="width: 250px" />
+							</div>
+							<div id="map" style="width: 100%; height: 500px;"
+									data-edit = "true"
+									data-zoom_min = "'.$map_acf['zoom']['min'].'"
+									data-zoom_max = "'.$map_acf['zoom']['max'].'"
+									data-north_east = "'.$north_east.'"
+									data-south_west = "'.$south_west.'"
+									data-mapId="'.$map_obj->ID.'"
+									data-mapUrl="'.$map_url.'"
+									data-iconUrl="'.plugin_dir_url( __DIR__ ).'images/icons/default.svg"></div>
+			';
+		}
 	}
 
 	function wpt_add_points_metaboxes() {

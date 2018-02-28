@@ -39,17 +39,25 @@
 		$upload_dir = wp_upload_dir();
 		$map_url = get_field('map_url', $post->ID);
 		$map_acf = array(
+			'set_max_bounds' => get_field('set_max_bounds', $post->ID),
+			'zoom' => get_field('zoom', $post->ID),
 			'north_east' => get_field('north_east', $post->ID),
 			'south_west' => get_field('south_west', $post->ID)
 		);
 		$north_east = $map_acf['north_east']['lat'] ? '['.$map_acf['north_east']['lat'].', '.$map_acf['north_east']['lng'].']' : "";
 		$south_west = $map_acf['south_west']['lat'] ? '['.$map_acf['south_west']['lat'].', '.$map_acf['south_west']['lng'].']' : "";
+		if($map_acf['set_max_bounds'] !== true){
+			$north_east =  "";
+			$south_west = "";
+		}
 		$str = '<div style="margin-bottom: 20px;">
                 Lat: <input class="lat" type="text" name="lat" style="width: 250px" />
                 Lng: <input class="lng" type="text" name="lng" style="width: 250px" />
             </div>
             <div id="map" style="width: 100%; height: 500px;"
                 data-edit = "true"
+                data-zoom_min = "'.$map_acf['zoom']['min'].'"
+                data-zoom_max = "'.$map_acf['zoom']['max'].'"
                 data-north_east = "'.$north_east.'"
                 data-south_west = "'.$south_west.'"
                 data-mapId="'.$post->ID.'"
